@@ -122,6 +122,37 @@ body {
   to { transform: scaleX(1); }
 }
 
+/* Paxos visualization animations */
+@keyframes nodeHighlight {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  50% { box-shadow: 0 0 15px 6px rgba(59, 130, 246, 0.5); }
+}
+
+@keyframes messagePulse {
+  0% { stroke-dashoffset: 100%; opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { stroke-dashoffset: 0%; opacity: 0; }
+}
+
+@keyframes consensusReveal {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes logSlideIn {
+  from { transform: translateX(-10px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes statusFade {
+  0% { opacity: 0; transform: translateY(-5px); }
+  30% { opacity: 1; transform: translateY(0); }
+  70% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
 /* Pulse animation for status dots */
 .animate-pulse-gentle {
   animation: pulseGentle 2.5s ease-in-out infinite;
@@ -131,6 +162,41 @@ body {
 .animate-line-grow {
   animation: lineGrow 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transform-origin: left;
+}
+
+/* Paxos animation utilities */
+.animate-node-highlight {
+  animation: nodeHighlight 400ms ease-in-out;
+}
+
+.animate-message-pulse {
+  animation: messagePulse 400ms ease-out forwards;
+}
+
+.animate-consensus-reveal {
+  animation: consensusReveal 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-log-slide {
+  animation: logSlideIn 300ms ease-out forwards;
+}
+
+.animate-status-fade {
+  animation: statusFade 2s ease-out forwards;
+}
+
+.animate-message-dot {
+  opacity: 0;
+  animation: messagePulse 400ms ease-out forwards;
+}
+
+/* Hide scrollbar for consensus log */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Minimal scrollbar */
