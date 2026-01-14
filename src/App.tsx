@@ -15,7 +15,6 @@ const sections: Section[] = [
   { id: 'contact', label: 'Contact', component: ContactSection },
 ];
 
-const AUTO_PROGRESS_INTERVAL = 6000;
 const SCROLL_COOLDOWN = 800; // Cooldown between section changes
 const EDGE_THRESHOLD = 10; // Pixels from edge to consider "at edge"
 const WHEEL_THRESHOLD = 200; // Accumulated wheel delta needed to trigger transition
@@ -23,21 +22,11 @@ const WHEEL_THRESHOLD = 200; // Accumulated wheel delta needed to trigger transi
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('intro');
   const [isAnimating, setIsAnimating] = useState(false);
-  const [autoProgress, setAutoProgress] = useState(true);
-  const autoProgressRef = useRef(autoProgress);
   const scrollCooldownRef = useRef(false);
   const wheelAccumulatorRef = useRef(0);
 
-  useEffect(() => {
-    autoProgressRef.current = autoProgress;
-  }, [autoProgress]);
-
-  const handleSectionChange = useCallback((sectionId: SectionId, isUserAction = true) => {
+  const handleSectionChange = useCallback((sectionId: SectionId) => {
     if (isAnimating || sectionId === activeSection) return;
-
-    if (isUserAction && autoProgressRef.current) {
-      setAutoProgress(false);
-    }
 
     setIsAnimating(true);
     setActiveSection(sectionId);
@@ -135,19 +124,6 @@ export default function App() {
     wheelAccumulatorRef.current = 0;
   }, [activeSection]);
 
-  // Auto-progress
-  useEffect(() => {
-    if (!autoProgress) return;
-
-    const interval = setInterval(() => {
-      const currentIndex = sections.findIndex(s => s.id === activeSection);
-      const nextIndex = (currentIndex + 1) % sections.length;
-      handleSectionChange(sections[nextIndex].id, false);
-    }, AUTO_PROGRESS_INTERVAL);
-
-    return () => clearInterval(interval);
-  }, [autoProgress, activeSection, handleSectionChange]);
-
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -193,7 +169,11 @@ export default function App() {
               isActive={isActive}
               onClick={handleSectionChange}
             >
-              {isActive && <SectionComponent />}
+              {isActive && (
+                section.id === 'intro'
+                  ? <SectionComponent onNavigate={handleSectionChange} />
+                  : <SectionComponent />
+              )}
             </SectionBar>
           );
         })}

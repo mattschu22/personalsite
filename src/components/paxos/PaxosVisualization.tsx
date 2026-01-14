@@ -5,7 +5,7 @@ import PaxosNode from './PaxosNode';
 import CenterDisplay from './CenterDisplay';
 import PacketDot from './PacketDot';
 import StatusFeed from './StatusFeed';
-import ConsensusLog from './ConsensusLog';
+import PaxosInfoPanel from './PaxosInfoPanel';
 import type { NodePosition } from './paxosTypes';
 
 interface PaxosVisualizationProps {
@@ -70,7 +70,7 @@ export default function PaxosVisualization({ onComplete: _onComplete }: PaxosVis
 
   const radius = getRadius();
   const centerX = dimensions.width / 2;
-  const centerY = dimensions.height / 2 - 30;
+  const centerY = dimensions.height / 2 - 60;
 
   const getAbsolutePosition = (nodeIndex: number): NodePosition => {
     const relativePos = getNodePosition(nodeIndex, radius);
@@ -195,8 +195,8 @@ export default function PaxosVisualization({ onComplete: _onComplete }: PaxosVis
       {/* Status feed */}
       <StatusFeed messages={statusMessages} />
 
-      {/* Consensus log */}
-      <ConsensusLog entries={consensusLog} />
+      {/* Paxos info panel */}
+      <PaxosInfoPanel />
     </div>
   );
 }
