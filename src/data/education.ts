@@ -7,6 +7,7 @@ export const education: Education = {
       title: "M.S.E. Computer Science",
       status: "Expected May 2026",
       gpa: "4.0/4.0",
+      honors: ["University Honors", "Dean's List (All Semesters)"],
       courses: ["Operating Systems", "Compilers", "Scalable Systems"]
     },
     {
@@ -18,29 +19,36 @@ export const education: Education = {
     {
       title: "B.B.A. Business Administration",
       status: "Magna Cum Laude",
-      gpa: null,
-      honors: null
+      gpa: "3.9/4.0",
+      honors: ["William J. Branstrom Prize", "University Honors", "Dean's List (All Semesters)"]
     }
   ],
   keyCourses: [
     "Distributed Systems",
     "Machine Learning",
-    "LLMs",
+    "LLM Foundations",
     "Databases",
     "Networking",
     "Web Systems",
-    "UX Design"
+    "UX Design",
+    "Cybersecurity",
+    "Operating Systems",
+    "Advanced Operating Systems",
+    "Advanced Compilers",
+    "Machine Learning Research",
+    "Quantum Computing",
+    "Data Mining"
   ]
 };
 
 export const skills: Skills = {
-  languages: ["C++", "Go", "Python", "Java", "JavaScript", "TypeScript", "SQL"],
+  languages: ["C++", "Go", "Python", "JavaScript", "TypeScript", "SQL"],
   expertise: [
     "Multi-threading & Concurrency",
     "Networking & Distributed Systems",
+    "System Design & Infrastructure",
     "Machine Learning & AI Tools",
     "Databases & Web Applications",
-    "Cybersecurity",
     "Data Structures & Algorithms"
   ]
 };

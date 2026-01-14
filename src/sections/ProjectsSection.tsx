@@ -1,5 +1,5 @@
 import ContentPanel from '../components/ContentPanel';
-import { projects } from '../data/projects';
+import { projects, minorProjects } from '../data/projects';
 
 export default function ProjectsSection() {
   return (
@@ -68,8 +68,53 @@ export default function ProjectsSection() {
           </div>
         ))}
 
+        {/* Minor Projects */}
+        {minorProjects.length > 0 && (
+          <div className="animate-fade-up" style={{ animationDelay: `${200 + projects.length * 100}ms` }}>
+            <h3 className="text-sm font-semibold text-ink-500 uppercase tracking-wider mb-4">Other Projects</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {minorProjects.map((project, idx) => {
+                const colors = [
+                  { bg: 'bg-violet-50', border: 'border-violet-200', hover: 'hover:border-violet-300 hover:bg-violet-100/50', icon: 'bg-violet-500', tag: 'bg-violet-100 text-violet-700' },
+                  { bg: 'bg-cyan-50', border: 'border-cyan-200', hover: 'hover:border-cyan-300 hover:bg-cyan-100/50', icon: 'bg-cyan-500', tag: 'bg-cyan-100 text-cyan-700' },
+                  { bg: 'bg-amber-50', border: 'border-amber-200', hover: 'hover:border-amber-300 hover:bg-amber-100/50', icon: 'bg-amber-500', tag: 'bg-amber-100 text-amber-700' },
+                  { bg: 'bg-emerald-50', border: 'border-emerald-200', hover: 'hover:border-emerald-300 hover:bg-emerald-100/50', icon: 'bg-emerald-500', tag: 'bg-emerald-100 text-emerald-700' },
+                ];
+                const color = colors[idx % colors.length];
+
+                return (
+                  <div
+                    key={idx}
+                    className={`flex items-start gap-3 p-4 rounded-xl ${color.bg} border ${color.border} ${color.hover} transition-all`}
+                  >
+                    <div className={`w-8 h-8 rounded-lg ${color.icon} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                      <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-semibold text-ink-800">{project.title}</h4>
+                      <p className="text-xs text-ink-500 mt-0.5 line-clamp-1">{project.description}</p>
+                      <div className="flex flex-wrap gap-1 mt-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${color.tag}`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* GitHub CTA */}
-        <div className="rounded-2xl bg-gradient-to-br from-ink-900 via-ink-800 to-ink-900 p-8 md:p-10 animate-fade-up shadow-xl relative overflow-hidden" style={{ animationDelay: '500ms' }}>
+        <div className="rounded-2xl bg-gradient-to-br from-ink-900 via-ink-800 to-ink-900 p-8 md:p-10 animate-fade-up shadow-xl relative overflow-hidden" style={{ animationDelay: `${300 + projects.length * 100}ms` }}>
           {/* Decorative gradient */}
           <div
             className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl pointer-events-none"

@@ -29,6 +29,12 @@ export interface Project {
   tags: string[];
 }
 
+export interface MinorProject {
+  title: string;
+  description: string;
+  tags: string[];
+}
+
 export interface Degree {
   title: string;
   status: string;
