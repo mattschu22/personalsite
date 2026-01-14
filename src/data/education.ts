@@ -30,14 +30,16 @@ export const education: Education = {
     "Databases",
     "Networking",
     "Web Systems",
-    "UX Design",
+    "UX Development",
     "Cybersecurity",
     "Operating Systems",
-    "Advanced Operating Systems",
-    "Advanced Compilers",
     "Machine Learning Research",
     "Quantum Computing",
-    "Data Mining"
+    "Data Mining",
+    "Advanced Operating Systems",
+    "Advanced Compilers",
+    "Advanced Scalable Systems for Agentic AI",
+    "Advanced UX Development"
   ]
 };
 

@@ -32,7 +32,7 @@ export const projects: Project[] = [
   {
     title: "Pitch Prediction",
     subtitle: "Applying ML techniques to gain a competitive edge at the plate. ",
-    period: "August 2023 - September 2025",
+    period: "August 2023 - September 2024",
     description: "Used a variety of ML techniques to predict the type and location of pitches. Additional topics explored included best reliever - hitter matchups and outcomes of at-bats.",
     tags: ["ML", "Model Training", "Data Pipelines", "Data Science"]
   },
