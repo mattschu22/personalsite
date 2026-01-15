@@ -5,7 +5,7 @@ export default function IntroSection({ onNavigate }: SectionComponentProps) {
   return (
     <div
       data-content-panel="true"
-      className="h-full w-full relative overflow-hidden"
+      className="h-full min-h-screen w-full relative overflow-hidden"
     >
       <PaxosVisualization onNavigate={onNavigate} />
     </div>

@@ -154,8 +154,30 @@ export default function App() {
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-surface-50">
-      {/* Main container */}
-      <div className="flex h-full relative">
+      {/* Mobile layout - scrollable sections */}
+      <div className="md:hidden h-full overflow-y-auto scroll-smooth">
+        {sections.map((section) => {
+          const SectionComponent = section.component;
+          return (
+            <section
+              key={section.id}
+              id={`mobile-${section.id}`}
+              className="min-h-screen"
+            >
+              {section.id === 'intro'
+                ? <SectionComponent onNavigate={(id: SectionId) => {
+                    const el = document.getElementById(`mobile-${id}`);
+                    el?.scrollIntoView({ behavior: 'smooth' });
+                  }} />
+                : <SectionComponent />
+              }
+            </section>
+          );
+        })}
+      </div>
+
+      {/* Desktop layout - SectionBar tabs */}
+      <div className="hidden md:flex h-full relative">
         {sections.map((section, index) => {
           const SectionComponent = section.component;
           const isActive = activeSection === section.id;
