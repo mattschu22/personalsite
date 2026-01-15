@@ -1,14 +1,11 @@
 import ContentPanel from '../components/ContentPanel';
 import PaxosVisualization from '../components/paxos';
+import type { SectionComponentProps } from '../types';
 
-interface LandingSectionProps {
-  onComplete?: () => void;
-}
-
-export default function LandingSection({ onComplete }: LandingSectionProps) {
+export default function LandingSection({ onNavigate }: SectionComponentProps) {
   return (
     <ContentPanel className="bg-ink-900">
-      <PaxosVisualization onComplete={onComplete} />
+      <PaxosVisualization onNavigate={onNavigate} />
     </ContentPanel>
   );
 }

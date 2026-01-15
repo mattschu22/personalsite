@@ -28,10 +28,17 @@ export default function ProjectsSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                   </svg>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-gentle" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">Active</span>
-                </div>
+                {project.period.includes('Current') ? (
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-gentle" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">Active</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200">
+                    <span className="w-2 h-2 rounded-full bg-slate-400" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Completed</span>
+                  </div>
+                )}
               </div>
               <span className="text-xs text-ink-400 font-mono bg-ink-100/70 px-3 py-1.5 rounded-lg">
                 {project.period}
@@ -74,11 +81,13 @@ export default function ProjectsSection() {
             <h3 className="text-sm font-semibold text-ink-500 uppercase tracking-wider mb-4">Other Projects</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {minorProjects.map((project, idx) => {
+                // Curated 5-color palette: cool tones with warm accent
                 const colors = [
+                  { bg: 'bg-slate-50', border: 'border-slate-200', hover: 'hover:border-slate-300 hover:bg-slate-100/50', icon: 'bg-slate-500', tag: 'bg-slate-100 text-slate-700' },
                   { bg: 'bg-violet-50', border: 'border-violet-200', hover: 'hover:border-violet-300 hover:bg-violet-100/50', icon: 'bg-violet-500', tag: 'bg-violet-100 text-violet-700' },
-                  { bg: 'bg-cyan-50', border: 'border-cyan-200', hover: 'hover:border-cyan-300 hover:bg-cyan-100/50', icon: 'bg-cyan-500', tag: 'bg-cyan-100 text-cyan-700' },
+                  { bg: 'bg-sky-50', border: 'border-sky-200', hover: 'hover:border-sky-300 hover:bg-sky-100/50', icon: 'bg-sky-500', tag: 'bg-sky-100 text-sky-700' },
+                  { bg: 'bg-teal-50', border: 'border-teal-200', hover: 'hover:border-teal-300 hover:bg-teal-100/50', icon: 'bg-teal-500', tag: 'bg-teal-100 text-teal-700' },
                   { bg: 'bg-amber-50', border: 'border-amber-200', hover: 'hover:border-amber-300 hover:bg-amber-100/50', icon: 'bg-amber-500', tag: 'bg-amber-100 text-amber-700' },
-                  { bg: 'bg-emerald-50', border: 'border-emerald-200', hover: 'hover:border-emerald-300 hover:bg-emerald-100/50', icon: 'bg-emerald-500', tag: 'bg-emerald-100 text-emerald-700' },
                 ];
                 const color = colors[idx % colors.length];
 
@@ -131,7 +140,7 @@ export default function ProjectsSection() {
               </p>
             </div>
             <a
-              href="https://github.com/umMatt"
+              href="https://github.com/mattschu22"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-white text-ink-900 font-semibold text-sm hover:bg-rose-50 transition-colors shadow-lg hover:shadow-xl"

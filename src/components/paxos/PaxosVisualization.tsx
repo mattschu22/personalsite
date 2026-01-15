@@ -1,18 +1,19 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { usePaxosSimulation } from './usePaxosSimulation';
-import { nodeConfigs, getNodePosition } from './paxosData';
+import { nodeConfigs, getNodePosition, categoryToSection } from './paxosData';
 import PaxosNode from './PaxosNode';
 import CenterDisplay from './CenterDisplay';
 import PacketDot from './PacketDot';
 import StatusFeed from './StatusFeed';
 import PaxosInfoPanel from './PaxosInfoPanel';
 import type { NodePosition } from './paxosTypes';
+import type { SectionId } from '../../types';
 
 interface PaxosVisualizationProps {
-  onComplete?: () => void;
+  onNavigate?: (sectionId: SectionId) => void;
 }
 
-export default function PaxosVisualization({ onComplete: _onComplete }: PaxosVisualizationProps) {
+export default function PaxosVisualization({ onNavigate }: PaxosVisualizationProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 800,
@@ -98,6 +99,15 @@ export default function PaxosVisualization({ onComplete: _onComplete }: PaxosVis
     return '';
   };
 
+  const handleNodeClick = useCallback((nodeId: number) => {
+    if (!onNavigate) return;
+    const node = nodeConfigs.find(n => n.id === nodeId);
+    if (node) {
+      const sectionId = categoryToSection[node.category];
+      onNavigate(sectionId);
+    }
+  }, [onNavigate]);
+
   return (
     <div
       ref={containerRef}
@@ -174,6 +184,7 @@ export default function PaxosVisualization({ onComplete: _onComplete }: PaxosVis
             isWinner={isWinner}
             hasPromised={hasPromised}
             hasAccepted={hasAccepted}
+            onClick={() => handleNodeClick(node.id)}
             style={{
               left: pos.x,
               top: pos.y,

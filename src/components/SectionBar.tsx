@@ -50,9 +50,9 @@ export default function SectionBar({ id, label, index, isActive, onClick, childr
             style={{ background: config.accentBg }}
           />
 
-          {/* Active indicator line */}
+          {/* Active indicator line with rounded caps */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-300 opacity-30 group-hover:opacity-100"
+            className="absolute left-1 top-6 bottom-6 w-[3px] rounded-full transition-all duration-300 opacity-30 group-hover:opacity-100"
             style={{ background: config.accent }}
           />
 

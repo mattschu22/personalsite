@@ -1,4 +1,15 @@
-import type { ConsensusValue, NodeConfig } from './paxosTypes';
+import type { ConsensusValue, NodeConfig, CategoryType } from './paxosTypes';
+import type { SectionId } from '../../types';
+
+// Map Paxos node categories to navigation sections
+export const categoryToSection: Record<CategoryType, SectionId> = {
+  education: 'about',
+  experience: 'work',
+  skills: 'about',
+  projects: 'projects',
+  achievements: 'about',
+  languages: 'about',
+};
 
 export const consensusValues: ConsensusValue[] = [
   {
@@ -44,11 +55,13 @@ export const consensusValues: ConsensusValue[] = [
     category: 'projects',
     label: 'Projects',
     values: [
-      "I'm building Vibe Kernel, an AI-driven Linux kernel development assistant",
-      "I designed an orchestrator-worker agent pattern for kernel engineering",
-      "I integrated Model Context Protocol (MCP) for agent communication",
-      "I built a wine recommendation service with React, Python, and PostgreSQL",
-      "I use natural language processing for context-rich recommendations",
+      "I'm building Vibe Kernel, an automated kernel patch generation tool using AI agents",
+      "I created an Itinerary Planner that organizes multi-modal travel with AI",
+      "I built a wine recommendation service using React, Python, and PostgreSQL",
+      "I improved ShedSkin's Python-to-C transpilation with escape analysis",
+      "My ShedSkin optimizations achieved 22x and 47x speedups for tuples and classes",
+      "I built ML models to predict pitch types and locations for baseball analytics",
+      "I use Model Context Protocol (MCP) for agent communication across projects",
     ],
   },
   {

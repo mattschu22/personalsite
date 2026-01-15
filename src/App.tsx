@@ -10,8 +10,8 @@ import type { Section, SectionId } from './types';
 const sections: Section[] = [
   { id: 'intro', label: 'Intro', component: IntroSection },
   { id: 'about', label: 'About', component: AboutSection },
-  { id: 'work', label: 'Work', component: WorkSection },
   { id: 'projects', label: 'Projects', component: ProjectsSection },
+  { id: 'work', label: 'Work', component: WorkSection },
   { id: 'contact', label: 'Contact', component: ContactSection },
 ];
 

@@ -95,7 +95,7 @@ export default function ContactSection() {
                 </svg>
               </a>
               <a
-                href="https://github.com/umMatt"
+                href="https://github.com/mattschu22"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-xl bg-ink-900 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg"

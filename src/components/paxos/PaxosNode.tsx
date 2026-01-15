@@ -6,6 +6,7 @@ interface PaxosNodeProps {
   isWinner: boolean;
   hasPromised: boolean;
   hasAccepted: boolean;
+  onClick?: () => void;
   style: React.CSSProperties;
 }
 
@@ -15,6 +16,7 @@ export default function PaxosNode({
   isWinner,
   hasPromised,
   hasAccepted,
+  onClick,
   style,
 }: PaxosNodeProps) {
   const getNodeState = () => {
@@ -55,11 +57,15 @@ export default function PaxosNode({
 
   return (
     <div
-      className="absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 transition-all duration-300"
+      className={`absolute flex flex-col items-center gap-1.5 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${onClick ? 'cursor-pointer hover:scale-110' : ''}`}
       style={{
         ...style,
         transform: `translate(-50%, -50%) ${nodeState === 'winner' ? 'scale(1.1)' : 'scale(1)'}`,
       }}
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick(); } : undefined}
     >
       {/* Node circle - smaller */}
       <div
