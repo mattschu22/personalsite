@@ -116,7 +116,7 @@ export default function WorkSection() {
                 Download Resume
               </a>
               <a
-                href="https://linkedin.com/in/matt-schumacher"
+                href="https://linkedin.com/in/ummatt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-white/10 text-white font-semibold text-sm hover:bg-white/20 transition-colors border border-white/20"
