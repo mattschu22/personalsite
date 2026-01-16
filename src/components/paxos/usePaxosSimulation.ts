@@ -376,7 +376,19 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
 
   // Animation loop for packet progress
   useEffect(() => {
-    const animate = () => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const targetFps = isMobile ? 45 : 60;
+    const frameInterval = 1000 / targetFps;
+    let lastFrameTime = 0;
+
+    const animate = (currentTime: number) => {
+      // Throttle to target FPS
+      if (currentTime - lastFrameTime < frameInterval) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = currentTime;
+
       setPackets(prevPackets => {
         const now = Date.now();
         let hasChanges = false;
@@ -426,7 +438,10 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animationFrameRef.current = requestAnimationFrame(animate);
+    animationFrameRef.current = requestAnimationFrame((time) => {
+      lastFrameTime = time;
+      animate(time);
+    });
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);

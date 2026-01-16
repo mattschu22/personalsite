@@ -1,5 +1,8 @@
 import type { NodeConfig } from './paxosTypes';
 
+// Check if mobile for performance optimizations
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 interface PaxosNodeProps {
   config: NodeConfig;
   isProposing: boolean;
@@ -76,8 +79,8 @@ export default function PaxosNode({
           boxShadow: getBoxShadow(),
         }}
       >
-        {/* Proposing pulse animation */}
-        {nodeState === 'proposing' && (
+        {/* Proposing pulse animation - simplified on mobile */}
+        {nodeState === 'proposing' && !isMobile && (
           <div
             className="absolute inset-0 rounded-full animate-ping opacity-20"
             style={{ backgroundColor: config.color }}

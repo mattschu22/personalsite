@@ -17,6 +17,9 @@ const typeLabels: Record<Packet['type'], string> = {
 const ACCEPTED_PATH_FADE_DELAY = 500; // ms before fading
 const ACCEPTED_PATH_FADE_DURATION = 300; // ms to fade out
 
+// Check if mobile (can be passed as prop or detected)
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
 export default function PacketDot({ packet, fromPos, toPos, color }: PacketDotProps) {
   // Interpolate position based on progress
   const currentX = fromPos.x + (toPos.x - fromPos.x) * packet.progress;
@@ -56,23 +59,25 @@ export default function PacketDot({ packet, fromPos, toPos, color }: PacketDotPr
       {/* Hide dot/label for finished accepted packets - just show the path */}
       {!isFinishedAccepted && (
         <>
-          {/* Packet glow */}
-          <circle
-            cx={currentX}
-            cy={currentY}
-            r="16"
-            fill={color}
-            fillOpacity="0.15"
-          />
+          {/* Packet glow - skip on mobile for performance */}
+          {!isMobile && (
+            <circle
+              cx={currentX}
+              cy={currentY}
+              r="16"
+              fill={color}
+              fillOpacity="0.15"
+            />
+          )}
 
           {/* Packet body */}
           <circle
             cx={currentX}
             cy={currentY}
-            r="10"
+            r={isMobile ? 8 : 10}
             fill={color}
             stroke="white"
-            strokeWidth="2"
+            strokeWidth={isMobile ? 1.5 : 2}
           />
 
           {/* Packet label */}
@@ -82,7 +87,7 @@ export default function PacketDot({ packet, fromPos, toPos, color }: PacketDotPr
             textAnchor="middle"
             dominantBaseline="central"
             fill="white"
-            fontSize="8"
+            fontSize={isMobile ? 6 : 8}
             fontWeight="bold"
             fontFamily="monospace"
           >
