@@ -71,9 +71,9 @@ export default function PaxosVisualization({ onNavigate }: PaxosVisualizationPro
 
   const radius = getRadius();
   const centerX = dimensions.width / 2;
-  // On mobile, push diagram down to avoid header overlap
+  // On mobile, move diagram up to avoid info panel overlap at bottom
   const getCenterY = () => {
-    if (dimensions.width < 640) return dimensions.height / 2 + 40;
+    if (dimensions.width < 640) return dimensions.height / 2 - 60;
     return dimensions.height / 2 - 60;
   };
   const centerY = getCenterY();
