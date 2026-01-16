@@ -377,8 +377,10 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
   // Animation loop for packet progress
   useEffect(() => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const targetFps = isMobile ? 45 : 60;
+    const targetFps = 60;
     const frameInterval = 1000 / targetFps;
+    // On mobile, snap progress to fewer intermediate positions for smoother perceived motion
+    const progressStep = isMobile ? 0.05 : 0; // 0 = continuous, 0.05 = 20 steps
     let lastFrameTime = 0;
 
     const animate = (currentTime: number) => {
@@ -398,7 +400,12 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
           if (packet.arrived) return packet;
 
           const elapsed = now - packet.startTime;
-          const progress = Math.min(elapsed / packet.duration, 1);
+          let progress = Math.min(elapsed / packet.duration, 1);
+
+          // Quantize progress on mobile to reduce intermediate frames
+          if (progressStep > 0 && progress < 1) {
+            progress = Math.floor(progress / progressStep) * progressStep;
+          }
 
           if (progress >= 1 && !packet.arrived) {
             hasChanges = true;
