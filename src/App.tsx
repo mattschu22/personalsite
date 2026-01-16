@@ -36,7 +36,7 @@ export default function App() {
     wheelAccumulatorRef.current = 0;
 
     // Reset scroll position of current panel to kill momentum
-    const contentPanel = document.querySelector('[data-content-panel="true"]') as HTMLElement;
+    const contentPanel = document.querySelector('#desktop-layout [data-content-panel="true"]') as HTMLElement;
     if (contentPanel) {
       contentPanel.scrollTop = 0;
     }
@@ -68,9 +68,12 @@ export default function App() {
   // Wheel event handler for all scrolling (works even without scrollbar)
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      // Skip wheel handling on mobile (use native scroll)
+      if (window.innerWidth < 768) return;
+
       if (isAnimating || scrollCooldownRef.current) return;
 
-      const contentPanel = document.querySelector('[data-content-panel="true"]') as HTMLElement;
+      const contentPanel = document.querySelector('#desktop-layout [data-content-panel="true"]') as HTMLElement;
       if (!contentPanel) return;
 
       const { scrollTop, scrollHeight, clientHeight } = contentPanel;
@@ -177,7 +180,7 @@ export default function App() {
       </div>
 
       {/* Desktop layout - SectionBar tabs */}
-      <div className="hidden md:flex h-full relative">
+      <div id="desktop-layout" className="hidden md:flex h-full relative">
         {sections.map((section, index) => {
           const SectionComponent = section.component;
           const isActive = activeSection === section.id;
