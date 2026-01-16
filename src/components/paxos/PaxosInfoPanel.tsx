@@ -67,18 +67,18 @@ export default function PaxosInfoPanel() {
               </p>
               <div className="bg-slate-50 rounded px-1.5 py-1">
                 <div className="flex items-center justify-center gap-0.5">
-                  {[0, 1, 2, 3, 4].map((i) => (
+                  {[0, 1, 2, 3, 4, 5].map((i) => (
                     <div
                       key={i}
                       className={`w-3 h-3 rounded-full flex items-center justify-center text-[6px] font-bold ${
-                        i < 3 ? "bg-emerald-100 text-emerald-700 border border-emerald-300" : "bg-slate-200 text-slate-400"
+                        i < 4 ? "bg-emerald-100 text-emerald-700 border border-emerald-300" : "bg-slate-200 text-slate-400"
                       }`}
                     >
                       {i}
                     </div>
                   ))}
                 </div>
-                <p className="text-[7px] text-slate-500 text-center mt-0.5">3/5 = majority</p>
+                <p className="text-[7px] text-slate-500 text-center mt-0.5">4 of 6 nodes = majority consensus</p>
               </div>
             </div>
 

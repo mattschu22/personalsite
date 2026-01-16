@@ -59,6 +59,7 @@ export default {
       },
       fontFamily: {
         'display': ['Playfair Display', 'Georgia', 'serif'],
+        'heading': ['Inter', 'system-ui', 'sans-serif'],
         'body': ['DM Sans', 'system-ui', 'sans-serif'],
         'mono': ['JetBrains Mono', 'Consolas', 'monospace'],
       },
