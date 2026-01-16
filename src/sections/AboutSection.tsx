@@ -14,6 +14,40 @@ export default function AboutSection() {
 
       {/* Content */}
       <div className="px-8 md:px-12 lg:px-16 py-10 space-y-12">
+        {/* Profile / Headshot */}
+        <section className="animate-fade-up delay-150">
+          <div className="flex flex-col sm:flex-row gap-6 items-start">
+            <div className="flex-shrink-0">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-violet-100 to-purple-100 border-2 border-violet-200 overflow-hidden shadow-lg">
+                <img src="/headshot.jpg" alt="Matt Schumacher" className="w-full h-full object-cover" />
+              </div>
+            </div>
+
+            {/* Bio text */}
+            <div className="flex-1">
+              <h3 className="font-display text-2xl md:text-3xl text-ink-900 italic mb-3">
+                Matt Schumacher
+              </h3>
+              <p className="text-sm text-ink-600 leading-relaxed mb-4">
+                Software engineer passionate about distributed systems, performant code, and AI/ML.
+                Currently pursuing my Master's at the University of Michigan while building tools
+                that push the boundaries of what's possible with modern computing.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200">
+                  Distributed Systems
+                </span>
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                  AI/ML
+                </span>
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+                  Performance
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Education */}
         <section className="animate-fade-up delay-200">
           <div className="flex items-center gap-3 mb-6">

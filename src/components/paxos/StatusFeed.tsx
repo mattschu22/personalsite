@@ -15,7 +15,7 @@ const typeConfig: Record<StatusMessage['type'], { color: string; icon: string }>
 
 export default function StatusFeed({ messages }: StatusFeedProps) {
   return (
-    <div className="absolute top-8 right-8 w-[200px] md:w-[240px]">
+    <div className="hidden md:block absolute top-8 right-8 w-[200px] md:w-[240px]">
       <div className="bg-white/90 backdrop-blur-sm border border-slate-200/60 rounded-xl p-3 shadow-lg">
         {/* Header */}
         <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100">
