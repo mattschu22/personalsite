@@ -40,7 +40,7 @@ export default function CenterDisplay({
   const hasValue = displayValue !== null;
 
   return (
-    <div className="absolute left-1/2 top-[55%] md:top-[calc(50%-60px)] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center z-10 pointer-events-none">
+    <div className="absolute left-1/2 top-[calc(50%-40px)] md:top-[calc(50%-60px)] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center z-10 pointer-events-none">
       {/* Name */}
       <h1 className="font-display text-xl md:text-4xl lg:text-5xl text-slate-800 font-semibold tracking-tight mb-2 md:mb-4">
         {name}

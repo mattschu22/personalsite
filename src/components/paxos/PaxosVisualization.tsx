@@ -71,9 +71,9 @@ export default function PaxosVisualization({ onNavigate }: PaxosVisualizationPro
 
   const radius = getRadius();
   const centerX = dimensions.width / 2;
-  // On mobile, push diagram down to avoid header overlap
+  // Adjust vertical center: mobile pushed up to avoid bottom bar, desktop pushed up for header
   const getCenterY = () => {
-    if (dimensions.width < 640) return dimensions.height / 2 + 40;
+    if (dimensions.width < 640) return dimensions.height / 2 - 40;
     return dimensions.height / 2 - 60;
   };
   const centerY = getCenterY();
@@ -119,12 +119,12 @@ export default function PaxosVisualization({ onNavigate }: PaxosVisualizationPro
       className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden"
     >
       {/* Header */}
-      <div className="absolute top-0 left-0 px-4 md:px-12 lg:px-16 pt-6 md:pt-14 pb-4 md:pb-10 z-20 pointer-events-none max-w-xs md:max-w-md">
-        <p className="text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-blue-600 mb-2 md:mb-3 font-semibold">Welcome</p>
-        <h2 className="font-display text-2xl md:text-5xl lg:text-6xl text-slate-800 font-semibold mb-1 md:mb-2">
+      <div className="absolute top-0 left-0 px-4 md:px-12 lg:px-16 pt-3 md:pt-14 pb-2 md:pb-10 z-20 pointer-events-none max-w-[200px] md:max-w-md">
+        <p className="text-[9px] md:text-[11px] tracking-[0.2em] uppercase text-blue-600 mb-1 md:mb-3 font-semibold">Welcome</p>
+        <h2 className="font-display text-lg md:text-5xl lg:text-6xl text-slate-800 font-semibold mb-0.5 md:mb-2">
           Intro
         </h2>
-        <p className="text-xs md:text-sm text-slate-500">
+        <p className="text-[10px] md:text-sm text-slate-500">
           Distributed Consensus Demo
         </p>
       </div>
