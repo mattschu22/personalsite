@@ -53,7 +53,7 @@ export default function ContactSection() {
               <span className="text-[11px] tracking-[0.15em] uppercase text-violet-600 font-bold">Phone</span>
             </div>
             <p className="font-display text-xl md:text-2xl text-ink-900 italic mb-3">
-              (248) 990-3548
+              (248) 387-9503
             </p>
             <div className="flex items-center gap-2 text-sm text-ink-500 group-hover:text-violet-600 transition-colors font-medium">
               Call now
