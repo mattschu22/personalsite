@@ -41,7 +41,7 @@ export default function ContactSection() {
 
           {/* Phone */}
           <a
-            href="tel:+12489903548"
+            href="tel:+12483879503"
             className="card p-6 group animate-fade-up delay-300 hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-violet-50/50 to-purple-50/30 border-violet-200/50"
           >
             <div className="flex items-center gap-3 mb-5">
