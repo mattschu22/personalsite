@@ -9,11 +9,11 @@ export const projects: Project[] = [
     tags: ["AI/ML", "Linux", "MCP", "Systems", "Docker"]
   },
   {
-    title: "Itinerary Planner",
+    title: "Agentic K8s Autoscaler",
     subtitle: "AI-Powered End-to-End Travel Planner",
     period: "January 2026 - Current",
-    description: "Complete travel planner application with agentic AI. The agent compiles a complete destination to reach one destination from another by organizing ride-sharing services, buses, flights, and overnight stays if necessary. The agent presents multiple options (fast, cheap, sponsored, luxury, etc.) to the user and iteratively builds a finalized plan.",
-    tags: ["AI/ML", "UX", "MCP", "FastAPI"]
+    description: "Human-in-the-loop Kubernetes auto-scaling manager that continuously interprets cluster diagnostics (metrics, events, and workload status), produces live operator-facing reports, and recommends corrective scaling actions. Unlike standard autoscalers that primarily react to metrics, the manager explicitly diagnoses scaling failures.",
+    tags: ["Agentic AI", "Kubernetes", "MCP", "Infra"]
   },
   {
     title: "Wine Recommendation Service",
