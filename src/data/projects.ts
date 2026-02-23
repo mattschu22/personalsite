@@ -9,11 +9,11 @@ export const projects: Project[] = [
     tags: ["AI/ML", "Linux", "MCP", "Systems", "Docker"]
   },
   {
-    title: "Agentic K8s Autoscaler",
-    subtitle: "AI-Powered End-to-End Travel Planner",
+    title: "Cache-Affinity Inference Router",
+    subtitle: "Reducing prefill time for LLM-based applications",
     period: "January 2026 - Current",
-    description: "Human-in-the-loop Kubernetes auto-scaling manager that continuously interprets cluster diagnostics (metrics, events, and workload status), produces live operator-facing reports, and recommends corrective scaling actions. Unlike standard autoscalers that primarily react to metrics, the manager explicitly diagnoses scaling failures.",
-    tags: ["Agentic AI", "Kubernetes", "MCP", "Infra"]
+    description: "Working to reduce inference prefill time by load-aware cache affinity routing. Project disaggregates and shares KV-Cache between spatially co-located nodes. Queries are then routed to node groups based on radix-tree prefix length and application defined semantic variables.",
+    tags: ["Distributed Systems", "Inference", "Routing", "LLMs"]
   },
   {
     title: "Wine Recommendation Service",
