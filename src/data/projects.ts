@@ -18,7 +18,7 @@ export const projects: Project[] = [
   {
     title: "Anthropic Performance Challenge",
     subtitle: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors",
-    period: "January 2026 - Current",
+    period: "January 2026",
     description: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors. Project used a combination of techniques to achieve a 125x speedup over the baseline implementation and 13% improvement over what Opus 4.5 was able to do with unlimited time and Anthropic's cutom test harness.",
     tags: ["Optimization", "Inference", "Assembly", "Parallelism"]
   },
