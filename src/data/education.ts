@@ -5,10 +5,10 @@ export const education: Education = {
   degrees: [
     {
       title: "M.S.E. Computer Science",
-      status: "Expected May 2026",
+      status: "May 2026",
       gpa: "4.0/4.0",
       honors: ["University Honors", "Dean's List (All Semesters)"],
-      courses: ["Operating Systems", "Compilers", "Scalable Systems"]
+      courses: ["Operating Systems", "Compilers", "Advanced Scalable Systems"]
     },
     {
       title: "B.S.E. Computer Science",
