@@ -2,10 +2,24 @@ import type { Project, MinorProject } from '../types';
 
 export const projects: Project[] = [
   {
-    title: "Vibe Kernel",
+    title: "Anthropic Performance Challenge",
+    subtitle: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors",
+    period: "January 2026",
+    description: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors. Project used a combination of techniques to achieve a 125x speedup over the baseline implementation and 13% improvement over what Opus 4.5 was able to do with unlimited time and Anthropic's cutom test harness.",
+    tags: ["Optimization", "Inference", "Assembly", "Parallelism"]
+  },
+  {
+    title: "MattSQL",
+    subtitle: "Custom SQL Engine and Database Runtime",
+    period: "Current",
+    description: "Building MattSQL toward a full custom SQL database engine, starting with a C++ query pipeline for lexing, parsing, binding, planning, optimization, execution, catalog management, and table storage. The long-term goal is a complete SQL system with durable storage, transactions, recovery, runtime ownership, batched I/O, and an eventual database-oriented operating environment.",
+    tags: ["C++", "Databases", "SQL", "Storage Engines", "Runtime Systems"]
+  },
+  {
+    title: "Linux Kernel Patching Agent",
     subtitle: "Agentic Kernel Development Assistant",
     period: "August 2025 - Current",
-    description: "End-to-end automated kernel patch generation tool. The Vibe Kernel agent scrapes bugs found from Google's Syzkaller (kernel fuzzer) project and utilizes an orchestrator-worker agent pattern to produces patches autonomously. Project made use of a small cluster deployed on GCP to parallelize kernel building and verification.",
+    description: "End-to-end automated kernel patch generation tool. The Linux Kernel Patching Agent scrapes bugs found from Google's Syzkaller (kernel fuzzer) project and utilizes an orchestrator-worker agent pattern to produces patches autonomously. Project made use of a small cluster deployed on GCP to parallelize kernel building and verification.",
     tags: ["AI/ML", "Linux", "MCP", "Systems", "Docker"]
   },
   {
@@ -14,13 +28,6 @@ export const projects: Project[] = [
     period: "January 2026 - Current",
     description: "Working to reduce inference prefill time by load-aware cache affinity routing. Project disaggregates and shares KV-Cache between spatially co-located nodes. Queries are then routed to node groups based on radix-tree prefix length and application defined semantic variables.",
     tags: ["Distributed Systems", "Inference", "Routing", "LLMs"]
-  },
-  {
-    title: "Anthropic Performance Challenge",
-    subtitle: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors",
-    period: "January 2026",
-    description: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors. Project used a combination of techniques to achieve a 125x speedup over the baseline implementation and 13% improvement over what Opus 4.5 was able to do with unlimited time and Anthropic's cutom test harness.",
-    tags: ["Optimization", "Inference", "Assembly", "Parallelism"]
   },
   {
     title: "Wine Recommendation Service",

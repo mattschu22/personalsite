@@ -55,7 +55,8 @@ export const consensusValues: ConsensusValue[] = [
     category: 'projects',
     label: 'Projects',
     values: [
-      "I'm building Vibe Kernel, an automated kernel patch generation tool using AI agents",
+      "I'm building Linux Kernel Patching Agent, an automated kernel patch generation tool using AI agents",
+      "I'm building MattSQL toward a full custom SQL engine and database runtime",
       "I created an Itinerary Planner that organizes multi-modal travel with AI",
       "I built a wine recommendation service using React, Python, and PostgreSQL",
       "I improved ShedSkin's Python-to-C++ transpilation with escape analysis",

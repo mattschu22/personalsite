@@ -126,7 +126,7 @@ Each node cycles through multiple facts from `paxosData.ts`:
 - **Education**: Degrees (MSE CS, BSE CS, BBA), honors, coursework
 - **Experience**: CHEPS healthcare simulation, Aptiv automotive ML, Lakeside patents
 - **Skills**: Languages, systems programming, ML, databases
-- **Projects**: Vibe Kernel, wine recommendation service
+- **Projects**: Linux Kernel Patching Agent, wine recommendation service
 - **Achievements**: Patents, publications
 - **Languages**: C++, Go, Python, TypeScript, Java, SQL, Bash
 

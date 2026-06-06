@@ -155,7 +155,7 @@ export default function PaxosInfoPanel() {
                 <h3 className="text-xs font-semibold text-slate-800">The Problem</h3>
               </div>
               <p className="text-[11px] text-slate-600 leading-relaxed">
-                Distributed servers must agree on shared data, but networks are unreliable—messages get delayed and servers crash.
+                Distributed servers must agree on shared data, but networks are unreliable. Messages get delayed and servers crash.
               </p>
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-1">

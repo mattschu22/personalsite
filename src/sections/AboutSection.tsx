@@ -28,20 +28,31 @@ export default function AboutSection() {
               <h3 className="font-display text-2xl md:text-3xl text-ink-900 italic mb-3">
                 Matt Schumacher
               </h3>
+              <p className="text-sm text-ink-600 leading-relaxed mb-3">
+                Most of my work is in systems software: operating systems, distributed systems,
+                compilers, and inference infrastructure. I am currently building MattSQL, a custom
+                SQL engine and database runtime, alongside a Linux kernel patching agent and
+                cache-affinity routing work for LLM inference.
+              </p>
               <p className="text-sm text-ink-600 leading-relaxed mb-4">
-                Software engineer passionate about distributed systems, performant code, and AI/ML.
-                Currently pursuing my Master's at the University of Michigan while building tools
-                that push the boundaries of what's possible with modern computing.
+                The common thread in my work is practical systems design: improving performance,
+                reasoning about scheduling, reducing unnecessary data movement, and preserving
+                correctness as systems become more concurrent or distributed. I have applied that
+                lens across compiler optimization, SQL execution, distributed services, kernel
+                tooling, and inference workloads.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 border border-violet-200">
-                  Distributed Systems
+                  Operating Systems
                 </span>
                 <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
-                  AI/ML
+                  Distributed Systems
                 </span>
                 <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
-                  Performance
+                  Compilers
+                </span>
+                <span className="text-xs font-medium px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  Inference
                 </span>
               </div>
             </div>
