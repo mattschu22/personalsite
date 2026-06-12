@@ -123,7 +123,7 @@ export default function ContactSection() {
               <span className="text-[11px] tracking-[0.2em] uppercase text-emerald-400 font-bold">Available Now</span>
             </div>
             <p className="font-display text-2xl md:text-4xl text-white italic mb-8 max-w-md leading-tight">
-              Open to full-time opportunities starting May 2026
+              Open to full-time opportunities starting June 2026
             </p>
             <a
               href="mailto:umMatt@umich.edu"
