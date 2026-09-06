@@ -5,8 +5,8 @@ export default function AboutSection() {
   return (
     <ContentPanel>
       {/* Header */}
-      <div className="px-8 md:px-12 lg:px-16 pt-14 pb-10 bg-gradient-to-b from-violet-50/50 to-transparent">
-        <p className="animate-fade-up text-[11px] tracking-[0.2em] uppercase text-violet-600 mb-3 font-semibold">Background</p>
+      <div className="ledger-header">
+        <p className="animate-fade-up ledger-eyebrow mb-3">02 / Background</p>
         <h2 className="animate-scale-in delay-100 font-display text-display-xl text-ink-900">
           About
         </h2>
@@ -29,10 +29,9 @@ export default function AboutSection() {
                 Matt Schumacher
               </h3>
               <p className="text-sm text-ink-600 leading-relaxed mb-3">
-                Most of my work is in systems software: operating systems, distributed systems,
-                compilers, and inference infrastructure. I am currently building MattSQL, a custom
-                SQL engine and database runtime, alongside a Linux kernel patching agent and
-                cache-affinity routing work for LLM inference.
+                I am a software engineer at SpaceX, building reliable systems for Starlink enterprise
+                customers. Most of my work is in systems software: operating systems, distributed
+                systems, compilers, databases, and infrastructure.
               </p>
               <p className="text-sm text-ink-600 leading-relaxed mb-4">
                 The common thread in my work is practical systems design: improving performance,

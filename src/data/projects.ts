@@ -5,7 +5,7 @@ export const projects: Project[] = [
     title: "Anthropic Performance Challenge",
     subtitle: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors",
     period: "January 2026",
-    description: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors. Project used a combination of techniques to achieve a 125x speedup over the baseline implementation and 13% improvement over what Opus 4.5 was able to do with unlimited time and Anthropic's cutom test harness.",
+    description: "Optimized assembly code for parallel tree traversal on VLIW/SIMD processors. The implementation achieved a 125× speedup over the baseline and improved by 13% on the result produced by Opus 4.5 with unlimited time and Anthropic’s custom test harness.",
     tags: ["Optimization", "Inference", "Assembly", "Parallelism"]
   },
   {
@@ -19,7 +19,7 @@ export const projects: Project[] = [
     title: "Linux Kernel Patching Agent",
     subtitle: "Agentic Kernel Development Assistant",
     period: "August 2025 - Current",
-    description: "End-to-end automated kernel patch generation tool. The Linux Kernel Patching Agent scrapes bugs found from Google's Syzkaller (kernel fuzzer) project and utilizes an orchestrator-worker agent pattern to produces patches autonomously. Project made use of a small cluster deployed on GCP to parallelize kernel building and verification.",
+    description: "An end-to-end automated kernel patch generation tool. The system ingests bugs found by Google’s Syzkaller kernel fuzzer and uses an orchestrator-worker agent pattern to produce patches autonomously. A small GCP cluster parallelizes kernel builds and verification.",
     tags: ["AI/ML", "Linux", "MCP", "Systems", "Docker"]
   },
   {
@@ -33,14 +33,14 @@ export const projects: Project[] = [
     title: "Wine Recommendation Service",
     subtitle: "Full-Stack AI Application",
     period: "May 2025 - Current",
-    description: "Natural language-driven wine recommendations using TypeScript (React + Tailwind), Python, and PostgreSQL. MCP-powered agent communication for context-rich recommendations. Reliability is guarenteed through the use of structured responses via native function calling using OpenAI's SDK. Site features complete authentication system and chat history utility.",
+    description: "Natural-language wine recommendations built with TypeScript, React, Python, and PostgreSQL. MCP-powered agent communication provides context-rich recommendations, while native function calling produces structured responses. The application includes authentication and persistent chat history.",
     tags: ["TypeScript", "React", "Python", "PostgreSQL", "MCP"]
   },
   {
     title: "ShedSkin",
     subtitle: "Improving Python-to-C Transpilation",
     period: "August 2025 - December 2025",
-    description: "Improved the OSS ShedSkin project by using escape analysis to safely stack-allocate method-local objects. Objects were determined to be local to a given method by walking the AST checking for definitions that reached an emitting control-flow statement. The resulting changes improved the runtimes of programs that initialized and access tuples and classes within a tight loop by 22x and 47x respectively.",
+    description: "Improved the open-source ShedSkin compiler by using escape analysis to safely stack-allocate method-local objects. The pass walks the AST to identify definitions that reach an escaping control-flow statement. The changes improved tight-loop tuple and class allocation workloads by 22× and 47×, respectively.",
     tags: ["Compilers", "Python", "C++", "Memory Allocation", "Escape Analysis"]
   },
   {

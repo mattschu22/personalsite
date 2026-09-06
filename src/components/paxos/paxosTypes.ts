@@ -56,7 +56,7 @@ export interface PaxosState {
   consensusCategory: CategoryType | null;
   // Round tracking
   roundNumber: number;
-  // Value index for cycling through resume data
+  // Value index for cycling through profile data
   valueIndices: Record<CategoryType, number>;
 }
 

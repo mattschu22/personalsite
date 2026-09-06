@@ -1,23 +1,21 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import SectionBar from './components/SectionBar';
 import IntroSection from './sections/IntroSection';
-import AboutSection from './sections/AboutSection';
 import WorkSection from './sections/WorkSection';
 import ProjectsSection from './sections/ProjectsSection';
 import ContactSection from './sections/ContactSection';
 import type { Section, SectionId } from './types';
 
 const sections: Section[] = [
-  { id: 'intro', label: 'Intro', component: IntroSection },
-  { id: 'about', label: 'About', component: AboutSection },
+  { id: 'intro', label: 'Paxos', component: IntroSection },
   { id: 'projects', label: 'Projects', component: ProjectsSection },
   { id: 'work', label: 'Work', component: WorkSection },
-  { id: 'contact', label: 'Contact', component: ContactSection },
+  { id: 'contact', label: 'About', component: ContactSection },
 ];
 
-const SCROLL_COOLDOWN = 800; // Cooldown between section changes
-const EDGE_THRESHOLD = 10; // Pixels from edge to consider "at edge"
-const WHEEL_THRESHOLD = 200; // Accumulated wheel delta needed to trigger transition
+const SCROLL_COOLDOWN = 650;
+const EDGE_THRESHOLD = 10;
+const WHEEL_THRESHOLD = 180;
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<SectionId>('intro');
@@ -30,175 +28,94 @@ export default function App() {
 
     setIsAnimating(true);
     setActiveSection(sectionId);
-
-    // Set scroll cooldown and kill momentum
     scrollCooldownRef.current = true;
     wheelAccumulatorRef.current = 0;
 
-    // Reset scroll position of current panel to kill momentum
-    const contentPanel = document.querySelector('#desktop-layout [data-content-panel="true"]') as HTMLElement;
-    if (contentPanel) {
-      contentPanel.scrollTop = 0;
-    }
-
-    setTimeout(() => {
+    window.setTimeout(() => {
       scrollCooldownRef.current = false;
       wheelAccumulatorRef.current = 0;
     }, SCROLL_COOLDOWN);
+    window.setTimeout(() => setIsAnimating(false), 600);
+  }, [activeSection, isAnimating]);
 
-    setTimeout(() => setIsAnimating(false), 700);
-  }, [isAnimating, activeSection]);
-
-  // Handle navigation to next/prev section
   const navigateSection = useCallback((direction: 'next' | 'prev') => {
     if (isAnimating || scrollCooldownRef.current) return false;
+    const currentIndex = sections.findIndex((section) => section.id === activeSection);
+    const nextIndex = direction === 'next' ? currentIndex + 1 : currentIndex - 1;
+    if (!sections[nextIndex]) return false;
+    handleSectionChange(sections[nextIndex].id);
+    return true;
+  }, [activeSection, handleSectionChange, isAnimating]);
 
-    const currentIndex = sections.findIndex(s => s.id === activeSection);
-
-    if (direction === 'next' && currentIndex < sections.length - 1) {
-      handleSectionChange(sections[currentIndex + 1].id);
-      return true;
-    } else if (direction === 'prev' && currentIndex > 0) {
-      handleSectionChange(sections[currentIndex - 1].id);
-      return true;
-    }
-    return false;
-  }, [activeSection, isAnimating, handleSectionChange]);
-
-  // Wheel event handler for all scrolling (works even without scrollbar)
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      // Skip wheel handling on mobile (use native scroll)
-      if (window.innerWidth < 768) return;
+    const handleWheel = (event: WheelEvent) => {
+      if (window.innerWidth < 768 || isAnimating || scrollCooldownRef.current) return;
+      const panel = document.querySelector('#desktop-layout [data-content-panel="true"]') as HTMLElement | null;
+      if (!panel) return;
 
-      if (isAnimating || scrollCooldownRef.current) return;
+      const hasVerticalScroll = panel.scrollHeight > panel.clientHeight;
+      const atTop = panel.scrollTop <= EDGE_THRESHOLD;
+      const atBottom = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - EDGE_THRESHOLD;
+      const canChangeSection = !hasVerticalScroll || (event.deltaY > 0 ? atBottom : atTop);
 
-      const contentPanel = document.querySelector('#desktop-layout [data-content-panel="true"]') as HTMLElement;
-      if (!contentPanel) return;
-
-      const { scrollTop, scrollHeight, clientHeight } = contentPanel;
-      const hasScrollbar = scrollHeight > clientHeight;
-      const isAtBottom = scrollTop + clientHeight >= scrollHeight - EDGE_THRESHOLD;
-      const isAtTop = scrollTop <= EDGE_THRESHOLD;
-      const scrollingDown = e.deltaY > 0;
-      const scrollingUp = e.deltaY < 0;
-
-      // If no scrollbar, use wheel directly to navigate
-      if (!hasScrollbar) {
-        wheelAccumulatorRef.current += e.deltaY;
-
-        if (wheelAccumulatorRef.current > WHEEL_THRESHOLD) {
-          if (navigateSection('next')) {
-            e.preventDefault();
-          }
-        } else if (wheelAccumulatorRef.current < -WHEEL_THRESHOLD) {
-          if (navigateSection('prev')) {
-            e.preventDefault();
-          }
-        }
+      if (!canChangeSection) {
+        wheelAccumulatorRef.current = 0;
         return;
       }
 
-      // If has scrollbar, only navigate when truly at edge and continuing to scroll
-      if (isAtBottom && scrollingDown) {
-        // User is at bottom and still scrolling down - accumulate
-        wheelAccumulatorRef.current += e.deltaY;
-        if (wheelAccumulatorRef.current > WHEEL_THRESHOLD) {
-          navigateSection('next');
-        }
-      } else if (isAtTop && scrollingUp) {
-        // User is at top and still scrolling up - accumulate
-        wheelAccumulatorRef.current += e.deltaY;
-        if (wheelAccumulatorRef.current < -WHEEL_THRESHOLD) {
-          navigateSection('prev');
-        }
-      } else {
-        // Not at edge or scrolling in opposite direction - reset accumulator
-        wheelAccumulatorRef.current = 0;
-      }
+      wheelAccumulatorRef.current += event.deltaY;
+      if (wheelAccumulatorRef.current > WHEEL_THRESHOLD && navigateSection('next')) event.preventDefault();
+      if (wheelAccumulatorRef.current < -WHEEL_THRESHOLD && navigateSection('prev')) event.preventDefault();
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [activeSection, isAnimating, navigateSection]);
+  }, [isAnimating, navigateSection]);
 
-  // Reset wheel accumulator when section changes
   useEffect(() => {
-    wheelAccumulatorRef.current = 0;
-  }, [activeSection]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (isAnimating) return;
+      const currentIndex = sections.findIndex((section) => section.id === activeSection);
 
-      const currentIndex = sections.findIndex(s => s.id === activeSection);
-
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        const nextIndex = (currentIndex + 1) % sections.length;
-        handleSectionChange(sections[nextIndex].id);
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        const prevIndex = (currentIndex - 1 + sections.length) % sections.length;
-        handleSectionChange(sections[prevIndex].id);
-      } else if (e.key >= '1' && e.key <= '5') {
-        e.preventDefault();
-        const index = parseInt(e.key) - 1;
-        if (sections[index]) {
-          handleSectionChange(sections[index].id);
-        }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        handleSectionChange(sections[(currentIndex + 1) % sections.length].id);
+      } else if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        handleSectionChange(sections[(currentIndex - 1 + sections.length) % sections.length].id);
+      } else if (event.key >= '1' && event.key <= '4') {
+        event.preventDefault();
+        const section = sections[Number(event.key) - 1];
+        if (section) handleSectionChange(section.id);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeSection, isAnimating, handleSectionChange]);
+  }, [activeSection, handleSectionChange, isAnimating]);
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-surface-50">
-      {/* Mobile layout - scrollable sections */}
       <div className="md:hidden h-full overflow-y-auto scroll-smooth">
         {sections.map((section) => {
           const SectionComponent = section.component;
           return (
-            <section
-              key={section.id}
-              id={`mobile-${section.id}`}
-              className="min-h-screen"
-            >
+            <section key={section.id} id={`mobile-${section.id}`} className="min-h-screen">
               {section.id === 'intro'
-                ? <SectionComponent onNavigate={(id: SectionId) => {
-                    const el = document.getElementById(`mobile-${id}`);
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }} />
-                : <SectionComponent />
-              }
+                ? <SectionComponent onNavigate={(id: SectionId) => document.getElementById(`mobile-${id}`)?.scrollIntoView({ behavior: 'smooth' })} />
+                : <SectionComponent />}
             </section>
           );
         })}
       </div>
 
-      {/* Desktop layout - SectionBar tabs */}
       <div id="desktop-layout" className="hidden md:flex h-full relative">
         {sections.map((section, index) => {
           const SectionComponent = section.component;
           const isActive = activeSection === section.id;
-
           return (
-            <SectionBar
-              key={section.id}
-              id={section.id}
-              label={section.label}
-              index={index + 1}
-              isActive={isActive}
-              onClick={handleSectionChange}
-            >
-              {isActive && (
-                section.id === 'intro'
-                  ? <SectionComponent onNavigate={handleSectionChange} />
-                  : <SectionComponent />
-              )}
+            <SectionBar key={section.id} id={section.id} label={section.label} index={index + 1} isActive={isActive} onClick={handleSectionChange}>
+              {isActive && (section.id === 'intro' ? <SectionComponent onNavigate={handleSectionChange} /> : <SectionComponent />)}
             </SectionBar>
           );
         })}

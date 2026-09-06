@@ -5,7 +5,7 @@ export const education: Education = {
   degrees: [
     {
       title: "M.S.E. Computer Science",
-      status: "May 2026",
+      status: "Graduated May 2026",
       gpa: "4.0/4.0",
       honors: ["University Honors", "Dean's List (All Semesters)"],
       courses: ["Operating Systems", "Compilers", "Advanced Scalable Systems"]

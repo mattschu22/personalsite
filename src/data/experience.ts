@@ -2,6 +2,14 @@ import type { Experience } from '../types';
 
 export const experience: Experience[] = [
   {
+    company: "SpaceX",
+    role: "Software Engineer",
+    period: "July 2026 - Current",
+    highlights: [
+      "Build, extend, and scale reliable systems serving Starlink's largest enterprise customers; specific implementation details are covered by an NDA."
+    ]
+  },
+  {
     company: "University of Michigan - CHEPS",
     role: "Software Engineering Intern",
     period: "May 2024 - August 2025",

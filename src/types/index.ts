@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 
 // Section Types
-export type SectionId = 'intro' | 'about' | 'work' | 'projects' | 'contact';
+export type SectionId = 'intro' | 'projects' | 'work' | 'contact';
 
 export interface SectionComponentProps {
   onNavigate?: (sectionId: SectionId) => void;

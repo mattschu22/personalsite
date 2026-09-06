@@ -3,12 +3,12 @@ import type { SectionId } from '../../types';
 
 // Map Paxos node categories to navigation sections
 export const categoryToSection: Record<CategoryType, SectionId> = {
-  education: 'about',
+  education: 'contact',
   experience: 'work',
-  skills: 'about',
+  skills: 'contact',
   projects: 'projects',
-  achievements: 'about',
-  languages: 'about',
+  achievements: 'contact',
+  languages: 'contact',
 };
 
 export const consensusValues: ConsensusValue[] = [
@@ -16,7 +16,7 @@ export const consensusValues: ConsensusValue[] = [
     category: 'education',
     label: 'Education',
     values: [
-      "I'm pursuing an M.S.E. in Computer Science with a 4.0 GPA",
+      "I earned an M.S.E. in Computer Science with a 4.0 GPA",
       "I graduated Summa Cum Laude with a B.S.E. in Computer Science (3.9 GPA)",
       "I also hold a B.B.A. in Business Administration, Magna Cum Laude",
       "I was awarded the William J. Branstrom Prize for academic excellence",
@@ -30,6 +30,7 @@ export const consensusValues: ConsensusValue[] = [
     category: 'experience',
     label: 'Experience',
     values: [
+      "I build reliable systems for Starlink enterprise customers at SpaceX",
       "I led full-stack development of a simulation tool now used across 170 VA hospitals",
       "I achieved a 78% performance improvement through parallelization and caching",
       "I built ML-driven automated UX analysis for kiosk applications at Aptiv",
@@ -57,7 +58,7 @@ export const consensusValues: ConsensusValue[] = [
     values: [
       "I'm building Linux Kernel Patching Agent, an automated kernel patch generation tool using AI agents",
       "I'm building MattSQL toward a full custom SQL engine and database runtime",
-      "I created an Itinerary Planner that organizes multi-modal travel with AI",
+      "I achieved a 125× speedup in a VLIW/SIMD tree-traversal optimization challenge",
       "I built a wine recommendation service using React, Python, and PostgreSQL",
       "I improved ShedSkin's Python-to-C++ transpilation with escape analysis",
       "My ShedSkin optimizations achieved 22x and 47x speedups for tuples and classes",
@@ -91,12 +92,12 @@ export const consensusValues: ConsensusValue[] = [
 ];
 
 export const nodeConfigs: NodeConfig[] = [
-  { id: 0, category: 'education', label: 'Education', color: '#3B82F6' },
-  { id: 1, category: 'experience', label: 'Experience', color: '#8B5CF6' },
-  { id: 2, category: 'skills', label: 'Skills', color: '#14B8A6' },
-  { id: 3, category: 'projects', label: 'Projects', color: '#F43F5E' },
-  { id: 4, category: 'achievements', label: 'Achievements', color: '#F59E0B' },
-  { id: 5, category: 'languages', label: 'Languages', color: '#EC4899' },
+  { id: 0, category: 'education', label: 'Education', color: '#2B55D8' },
+  { id: 1, category: 'experience', label: 'Experience', color: '#2B55D8' },
+  { id: 2, category: 'skills', label: 'Skills', color: '#2B55D8' },
+  { id: 3, category: 'projects', label: 'Projects', color: '#2B55D8' },
+  { id: 4, category: 'achievements', label: 'Achievements', color: '#2B55D8' },
+  { id: 5, category: 'languages', label: 'Languages', color: '#2B55D8' },
 ];
 
 export const getNodePosition = (index: number, radius: number): { x: number; y: number } => {
