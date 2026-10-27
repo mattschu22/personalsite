@@ -36,7 +36,7 @@ export const consensusValues: ConsensusValue[] = [
       "I built ML-driven automated UX analysis for kiosk applications at Aptiv",
       "I developed a multi-modal ML system with 91% accuracy for autonomous drive testing",
       "I created data mining software linking UX issues to their root causes",
-      "My work won Best of Show at VMworld Las Vegas 2018, beating 500+ technologies",
+      "The Lakeside product I worked on won Best of Show at VMworld 2018",
       "I've worked across the full stack: ML integration, networking, and concurrent systems",
     ],
   },
@@ -46,10 +46,10 @@ export const consensusValues: ConsensusValue[] = [
     values: [
       "I'm proficient in C++, Go, Python, JavaScript, TypeScript, and SQL",
       "I specialize in multi-threading and concurrent programming",
-      "I have deep expertise in networking and distributed systems",
+      "I work on networking and distributed systems",
       "I build and deploy machine learning models and AI tools",
       "I design and optimize databases and web applications",
-      "I apply strong data structures and algorithms knowledge to solve problems",
+      "I’m interested in how data structures affect real-world performance",
     ],
   },
   {
@@ -86,7 +86,7 @@ export const consensusValues: ConsensusValue[] = [
       "I create type-safe web applications with TypeScript",
       "I build interactive web applications with JavaScript",
       "I design and query relational databases with SQL",
-      "I architect scalable system designs and infrastructure",
+      "I work on infrastructure and distributed services",
     ],
   },
 ];
@@ -110,13 +110,4 @@ export const getNodePosition = (index: number, radius: number): { x: number; y: 
     x: Math.cos(angle) * xRadius,
     y: Math.sin(angle) * yRadius,
   };
-};
-
-export const getCategoryValues = (category: string): string[] => {
-  const found = consensusValues.find((cv) => cv.category === category);
-  return found ? found.values : [];
-};
-
-export const getNodeByCategory = (category: string): NodeConfig | undefined => {
-  return nodeConfigs.find((nc) => nc.category === category);
 };

@@ -57,7 +57,6 @@ export interface PaxosState {
   // Round tracking
   roundNumber: number;
   // Value index for cycling through profile data
-  valueIndices: Record<CategoryType, number>;
 }
 
 export interface NodeConfig {
@@ -77,7 +76,7 @@ export interface StatusMessage {
   id: string;
   text: string;
   type: PacketType | 'consensus' | 'info';
-  timestamp: number;
+  sequence: number;
 }
 
 export interface ConsensusLogEntry {

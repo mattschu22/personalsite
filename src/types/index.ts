@@ -22,6 +22,7 @@ export interface Experience {
 }
 
 export interface Project {
+  highlights: string[];
   title: string;
   subtitle: string;
   period: string;

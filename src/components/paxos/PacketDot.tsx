@@ -9,8 +9,8 @@ export default function PacketDot({ packet, fromPos, toPos, color }: PacketDotPr
   return (
     <g opacity={packet.arrived ? .35 : 1}>
       <line x1={fromPos.x} y1={fromPos.y} x2={x} y2={y} stroke={color} strokeWidth="1" strokeOpacity=".28" />
-      <circle cx={x} cy={y} r="9" fill={color} stroke="#FAF9F5" strokeWidth="2" />
-      <text x={x} y={y} textAnchor="middle" dominantBaseline="central" fill="white" fontSize="7" fontWeight="600" fontFamily="monospace">{labels[packet.type]}</text>
+      <circle cx={x} cy={y} r="9" fill={color} stroke="var(--surface)" strokeWidth="2" />
+      <text x={x} y={y} textAnchor="middle" dominantBaseline="central" fill="var(--on-signal)" fontSize="7" fontWeight="600" fontFamily="monospace">{labels[packet.type]}</text>
     </g>
   );
 }

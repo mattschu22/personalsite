@@ -1,64 +1,25 @@
-import { useState } from 'react';
 import ContentPanel from '../components/ContentPanel';
-import { SqlBackdrop } from '../components/EngineeringVisuals';
 import { experience } from '../data/experience';
 
 export default function WorkSection() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const selected = experience[selectedIndex];
-
   return (
     <ContentPanel className="rail-panel work-rail-panel">
-      <section className="rail-layout">
-        <header className="rail-heading rail-heading-dark">
-          <div>
-            <p className="ledger-eyebrow">03 / Operating record</p>
-            <h2>Experience</h2>
-          </div>
-          <div className="work-metrics" aria-label="Career metrics">
-            <span><strong>8+</strong> years</span>
-            <span><strong>5</strong> roles</span>
-            <span><strong>170+</strong> hospitals</span>
-          </div>
+      <section className="rail-layout work-layout">
+        <header className="rail-heading">
+          <div><p className="ledger-eyebrow">03 / Experience</p><h2>Work so far.</h2></div>
         </header>
-
-        <div className="work-console">
-          <nav className="work-index" aria-label="Experience index">
-            {experience.map((job, index) => (
-              <button
-                key={`${job.company}-${job.role}`}
-                type="button"
-                className={selectedIndex === index ? 'work-index-active' : ''}
-                onClick={() => setSelectedIndex(index)}
-                aria-pressed={selectedIndex === index}
-              >
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <strong>{job.company}</strong>
-                  <small>{job.role}</small>
-                  <p>{job.highlights[0]}</p>
-                </div>
-                <b>{job.period}</b>
-              </button>
-            ))}
-          </nav>
-
-          <article className="work-detail" aria-live="polite">
-            <SqlBackdrop />
-            <div className="work-detail-meta"><span>ROLE / {String(selectedIndex + 1).padStart(2, '0')}</span><span>{selected.period}</span></div>
-            <p className="work-current-marker">{selectedIndex === 0 ? 'CURRENT SYSTEM' : 'ARCHIVED SYSTEM'}</p>
-            <h3>{selected.company}</h3>
-            <h4>{selected.role}</h4>
-            <ul>
-              {selected.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-            </ul>
-          </article>
+        <div className="career-list">
+          {experience.map((job, index) => (
+            <article className={`career-row ${index === 0 ? 'career-current' : ''}`} key={`${job.company}-${job.period}`}>
+              <div className="career-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</div>
+              <header className="career-role">
+                <p>{job.period}</p><h3>{job.company}</h3><h4>{job.role}</h4>
+              </header>
+              <ul className="career-description">{job.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}</ul>
+            </article>
+          ))}
         </div>
-
-        <footer className="work-footer">
-          <span>FULL EMPLOYMENT REGISTER / SELECT A ROW FOR DETAIL</span>
-          <a href="https://linkedin.com/in/ummatt" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
-        </footer>
+        <footer className="work-footer"><a href="https://linkedin.com/in/umMatt" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></footer>
       </section>
     </ContentPanel>
   );

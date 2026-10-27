@@ -18,6 +18,13 @@ const EDGE_THRESHOLD = 10;
 const WHEEL_THRESHOLD = 180;
 
 export default function App() {
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(media.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
   const [activeSection, setActiveSection] = useState<SectionId>('intro');
   const [isAnimating, setIsAnimating] = useState(false);
   const scrollCooldownRef = useRef(false);
@@ -45,7 +52,7 @@ export default function App() {
     if (!sections[nextIndex]) return false;
     handleSectionChange(sections[nextIndex].id);
     return true;
-  }, [activeSection, handleSectionChange, isAnimating]);
+  }, [activeSection, handleSectionChange, isAnimating, isMobile]);
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
@@ -74,7 +81,7 @@ export default function App() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isAnimating) return;
+      if (isAnimating || isMobile || (event.target instanceof HTMLElement && event.target.closest('input, textarea, select, [contenteditable="true"]'))) return;
       const currentIndex = sections.findIndex((section) => section.id === activeSection);
 
       if (event.key === 'ArrowRight') {
@@ -92,11 +99,11 @@ export default function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeSection, handleSectionChange, isAnimating]);
+  }, [activeSection, handleSectionChange, isAnimating, isMobile]);
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-surface-50">
-      <div className="md:hidden h-full overflow-y-auto scroll-smooth">
+      {isMobile ? <div className="h-full overflow-y-auto scroll-smooth">
         {sections.map((section) => {
           const SectionComponent = section.component;
           return (
@@ -109,7 +116,7 @@ export default function App() {
         })}
       </div>
 
-      <div id="desktop-layout" className="hidden md:flex h-full relative">
+      : <div id="desktop-layout" className="flex h-full relative">
         {sections.map((section, index) => {
           const SectionComponent = section.component;
           const isActive = activeSection === section.id;
@@ -119,7 +126,7 @@ export default function App() {
             </SectionBar>
           );
         })}
-      </div>
+      </div>}
     </div>
   );
 }

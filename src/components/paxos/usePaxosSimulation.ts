@@ -1,15 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { consensusValues, nodeConfigs } from './paxosData';
-import type { CategoryType, ConsensusLogEntry, NodeState, Packet, PacketType, PaxosState, StatusMessage } from './paxosTypes';
-
-const valueIndices: Record<CategoryType, number> = {
-  education: 0,
-  experience: 0,
-  skills: 0,
-  projects: 0,
-  achievements: 0,
-  languages: 0,
-};
+import type { ConsensusLogEntry, NodeState, Packet, PacketType, PaxosState, StatusMessage } from './paxosTypes';
 
 const initialState = (): PaxosState => ({
   phase: 'idle',
@@ -18,7 +9,6 @@ const initialState = (): PaxosState => ({
   consensusValue: null,
   consensusCategory: null,
   roundNumber: 0,
-  valueIndices,
 });
 
 const initialNodes = (): NodeState[] => nodeConfigs.map((node) => ({
@@ -48,8 +38,9 @@ export interface UsePaxosSimulationReturn {
   consensusLog: ConsensusLogEntry[];
 }
 
-export function usePaxosSimulation(): UsePaxosSimulationReturn {
+export function usePaxosSimulation(running = true): UsePaxosSimulationReturn {
   const [cycle, setCycle] = useState(0);
+  const messageSequence = useRef(0);
   const [state, setState] = useState<PaxosState>(initialState);
   const [nodeStates, setNodeStates] = useState<NodeState[]>(initialNodes());
   const [packets, setPackets] = useState<Packet[]>([]);
@@ -57,6 +48,7 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
   const [consensusLog, setConsensusLog] = useState<ConsensusLogEntry[]>([]);
 
   useEffect(() => {
+    if (!running) return;
     const timers: number[] = [];
     const nodeIds = nodeConfigs.map((node) => node.id);
     const ballotRanks = shuffled(nodeIds.map((_, index) => index + 1));
@@ -84,7 +76,8 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
     };
 
     const addStatus = (step: number, text: string, type: StatusMessage['type']) => {
-      setStatusMessages((messages) => [{ id: `${cycle}-${step}-${Math.random()}`, text, type, timestamp: step }, ...messages].slice(0, 4));
+      const sequence = ++messageSequence.current;
+      setStatusMessages((messages) => [{ id: `${cycle}-${step}-${sequence}`, text, type, sequence }, ...messages].slice(0, 4));
     };
 
     const send = (step: number, type: PacketType, from: number, targets: number[], proposalNumber: number, packetValue?: string) => {
@@ -164,7 +157,7 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
       const winningBallot = needsRetry ? retryBallot : ballots[winnerId];
       setState((current) => ({ ...current, phase: 'confirming' }));
       send(40, 'accept', winnerId, nodeIds, winningBallot, winnerValue);
-      addStatus(40, `${winner.label} broadcasts ACCEPT`, 'accept');
+      addStatus(40, `${winner.label} broadcasts accept`, 'accept');
     });
 
     later(quorumAt + 1900, () => {
@@ -182,10 +175,13 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
 
     later(quorumAt + 5600, () => setCycle((current) => current + 1));
     return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [cycle]);
+  }, [cycle, running]);
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
+    if (!running) return;
+    let frame = 0;
+    const animate = () => {
+      frame = window.requestAnimationFrame(animate);
       if (document.hidden) return;
       const now = Date.now();
       setPackets((current) => {
@@ -197,9 +193,10 @@ export function usePaxosSimulation(): UsePaxosSimulationReturn {
           })
           .filter((packet) => now - (packet.startTime + packet.duration) < 450);
       });
-    }, 32);
-    return () => window.clearInterval(interval);
-  }, []);
+    };
+    frame = window.requestAnimationFrame(animate);
+    return () => window.cancelAnimationFrame(frame);
+  }, [running]);
 
   return { state, nodeStates, packets, statusMessages, consensusLog };
 }

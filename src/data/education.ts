@@ -44,7 +44,7 @@ export const education: Education = {
 };
 
 export const skills: Skills = {
-  languages: ["C++", "Go", "Python", "JavaScript", "TypeScript", "SQL"],
+  languages: ["C++", "C#", "Go", "Python", "JavaScript", "TypeScript", "SQL"],
   expertise: [
     "Multi-threading & Concurrency",
     "Networking & Distributed Systems",
